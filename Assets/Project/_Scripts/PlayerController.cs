@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     public Animator _animator;
 
     [Header("Movement Settings")]
-    [Range(0f, 20f)]
+    [Range(0f, 100f)]
     [SerializeField] public float jumpForce = 5f;
 
     [Range(0f, 20f)]
@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
+        Time.timeScale = 1.3f;
         _animator = GetComponent<Animator>();   
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
