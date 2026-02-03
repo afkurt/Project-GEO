@@ -7,15 +7,21 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     [Header("Ground Check")]
-    [SerializeField] private Transform groundCheck; // Karakterin ayaklar�n�n alt�na bo� GameObject
+    [SerializeField] private Transform groundCheck; 
     [SerializeField] private Vector2 groundCheckSize = new Vector2(0.5f, 0.1f);
-    [SerializeField] private LayerMask groundLayer; // Inspector'dan "Ground" layer'�n� se�in
+    [SerializeField] private LayerMask groundLayer; 
     [SerializeField] private float fallMultiplier = 2.5f;
     [SerializeField] private float riseMultiplier = 2.5f;
 
+    [Header("Jump Buffer")]
+    [SerializeField] private float jumpBufferTime = 0.1f;
+    private float jumpBufferCounter;
+
+    [Header("Coyote Time")]
+    [SerializeField] private float coyoteTime = 0.1f;
+    private float coyoteTimeCounter;
 
 
-    [SerializeField] private TrailRenderer _tr;
     private SpriteRenderer _spriteRenderer;
     public Rigidbody2D _rb;
     public Animator _animator;
@@ -30,7 +36,6 @@ public class PlayerController : MonoBehaviour
     [Header("Input Actions")]
     [SerializeField] private InputActionReference move;
     [SerializeField] private InputActionReference jump;
-    [SerializeField] private InputActionReference dash;
 
     [SerializeField] private bool _isGrounded;
     private Vector2 _moveDirection;
@@ -39,17 +44,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        _isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0f, groundLayer);
-
-        if (_rb.linearVelocity.y > 0f)
-        {
-            _rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (riseMultiplier - 1) * Time.deltaTime;
-        }
-
-        else if (_rb.linearVelocity.y < 0)
-        {
-            _rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
-        }
+        CheckGround();
+        ApplyJumpGravity();
     }
 
     void OnDrawGizmosSelected()
@@ -71,23 +67,30 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Move();
-        Jump();
-
+        TryJump();
         if (Keyboard.current.rKey.wasPressedThisFrame)
         {
             Scene currentScene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(currentScene.buildIndex);
         }
 
+        if (jump.action.WasPressedThisFrame())
+            jumpBufferCounter = jumpBufferTime;
+        else
+            jumpBufferCounter -= Time.deltaTime;
 
+
+        if (_isGrounded)
+            coyoteTimeCounter = coyoteTime;
+        else
+            coyoteTimeCounter -= Time.deltaTime;
     }
-
 
     void Move()
     {
         _moveDirection = move.action.ReadValue<Vector2>();
 
-        // Yerdeyken tam kontrol, havadayken s�n�rl� kontrol
+        
         float airControlMultiplier = _isGrounded ? 1f : 0.9f;
 
         float targetVelocityX = _moveDirection.x * moveSpeed * airControlMultiplier;
@@ -104,14 +107,40 @@ public class PlayerController : MonoBehaviour
             _spriteRenderer.flipX = false;
     }
 
-
+    void TryJump()
+    {
+        if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f)
+        {
+            Jump();
+            jumpBufferCounter = 0f;
+            coyoteTimeCounter = 0f;
+        }
+    }
     void Jump()
     {
-        if (jump.action.WasPressedThisFrame() && _isGrounded)
+        _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpForce);
+        _animator.SetTrigger("Jump");
+    }
+
+    void CheckGround()
+    {
+        _isGrounded = Physics2D.OverlapBox(
+            groundCheck.position,
+            groundCheckSize,
+            0f,
+            groundLayer
+        );
+    }
+
+    void ApplyJumpGravity()
+    {
+        if (_rb.linearVelocity.y > 0f)
         {
-            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpForce);
-            _animator.SetTrigger("Jump");
-            _isGrounded = false;
+            _rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (riseMultiplier - 1f) * Time.fixedDeltaTime;
+        }
+        else if (_rb.linearVelocity.y < 0f)
+        {
+            _rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1f) * Time.fixedDeltaTime;
         }
     }
 

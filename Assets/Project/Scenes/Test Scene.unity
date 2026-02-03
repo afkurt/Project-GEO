@@ -128,14 +128,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2831718608311587807, guid: 87845bff82b753d409c1e5e6384d647d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 9.049219
-      objectReference: {fileID: 0}
-    - target: {fileID: 2831718608311587807, guid: 87845bff82b753d409c1e5e6384d647d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.0638468
-      objectReference: {fileID: 0}
-    - target: {fileID: 2831718608311587807, guid: 87845bff82b753d409c1e5e6384d647d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.24
       objectReference: {fileID: 0}
@@ -178,26 +170,6 @@ PrefabInstance:
     - target: {fileID: 6826012708186264541, guid: 87845bff82b753d409c1e5e6384d647d, type: 3}
       propertyPath: m_Name
       value: Moving Platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 6826012708186264541, guid: 87845bff82b753d409c1e5e6384d647d, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6826012708186264541, guid: 87845bff82b753d409c1e5e6384d647d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7763592776150561349, guid: 87845bff82b753d409c1e5e6384d647d, type: 3}
-      propertyPath: loop
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7763592776150561349, guid: 87845bff82b753d409c1e5e6384d647d, type: 3}
-      propertyPath: distance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7763592776150561349, guid: 87845bff82b753d409c1e5e6384d647d, type: 3}
-      propertyPath: moveOnStart
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1484,12 +1456,20 @@ PrefabInstance:
       value: Fake Platform
       objectReference: {fileID: 0}
     - target: {fileID: 7763592776150561349, guid: 87845bff82b753d409c1e5e6384d647d, type: 3}
+      propertyPath: loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763592776150561349, guid: 87845bff82b753d409c1e5e6384d647d, type: 3}
       propertyPath: distance
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7763592776150561349, guid: 87845bff82b753d409c1e5e6384d647d, type: 3}
       propertyPath: direction
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763592776150561349, guid: 87845bff82b753d409c1e5e6384d647d, type: 3}
+      propertyPath: moveOnStart
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -35,7 +35,8 @@ public class MovingPlatform : MonoBehaviour
 
         moveTween = transform.DOMove(targetPos, duration)
             .SetEase(moveCurve)
-            .SetAutoKill(false);
+            .SetAutoKill(false)
+            .SetLink(gameObject);
 
         if (loop)
             moveTween.SetLoops(-1, LoopType.Yoyo);
@@ -59,18 +60,21 @@ public class MovingPlatform : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (!collision.collider.CompareTag("Player")) return;
+    
 
-        collision.transform.SetParent(transform);
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!other.CompareTag("Player")) return;
+
+        other.transform.SetParent(transform);
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if (!collision.collider.CompareTag("Player")) return;
+        if (!other.CompareTag("Player")) return;
 
-        collision.transform.SetParent(null);
+        other.transform.SetParent(null);
     }
+
 
 }
