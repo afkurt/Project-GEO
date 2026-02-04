@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         _moveDirection = move.action.ReadValue<Vector2>();
-
+        
         
         float airControlMultiplier = _isGrounded ? 1f : 0.9f;
 
@@ -99,6 +99,8 @@ public class PlayerController : MonoBehaviour
             targetVelocityX,
             _rb.linearVelocity.y
         );
+
+        _animator.SetFloat("Speed", Mathf.Abs(_rb.linearVelocity.x));
 
         // Sprite y�n�
         if (_moveDirection.x < 0)
