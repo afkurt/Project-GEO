@@ -212,8 +212,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Trampoline
   _playerRB: {fileID: 0}
   jumpForce: 30
-  squashAmount: 0.2
-  squashDuration: 0.1
+  downAmount: 0.3
+  bounceDuration: 0.1
 --- !u!61 &284702779
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1443,8 +1443,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Trampoline
   _playerRB: {fileID: 0}
   jumpForce: 30
-  squashAmount: 0.2
-  squashDuration: 0.1
+  downAmount: 0.3
+  bounceDuration: 0.1
 --- !u!61 &1683218117
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1540,8 +1540,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Trampoline
   _playerRB: {fileID: 0}
   jumpForce: 10
-  squashAmount: 0.2
-  squashDuration: 0.1
+  downAmount: 0.3
+  bounceDuration: 0.1
 --- !u!61 &1872516697
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1637,8 +1637,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Trampoline
   _playerRB: {fileID: 0}
   jumpForce: 60
-  squashAmount: 0.2
-  squashDuration: 0.1
+  downAmount: 0.3
+  bounceDuration: 0.1
 --- !u!61 &1992508797
 BoxCollider2D:
   m_ObjectHideFlags: 0
