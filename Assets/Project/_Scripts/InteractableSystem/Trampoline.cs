@@ -43,12 +43,7 @@ public class Trampoline : InteractableBase
 
         bounceTween = transform
             .DOMoveY(startPos.y - downAmount, bounceDuration)
-            .SetEase(Ease.OutQuad)
-            .OnComplete(() =>
-            {
-                transform
-                    .DOMoveY(startPos.y, bounceDuration)
-                    .SetEase(Ease.OutBounce);
-            });
+            .SetEase(Ease.OutSine)
+            .SetLoops(2, LoopType.Yoyo);
     }
 }

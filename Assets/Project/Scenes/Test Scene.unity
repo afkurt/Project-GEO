@@ -1175,6 +1175,10 @@ PrefabInstance:
       propertyPath: groundCheckSize.x
       value: 1.28
       objectReference: {fileID: 0}
+    - target: {fileID: 2071827140515478074, guid: fe6b9ed270e5f1f48a13bc57e95812c9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5874974858646712573, guid: fe6b9ed270e5f1f48a13bc57e95812c9, type: 3}
       propertyPath: m_Name
       value: Player New
