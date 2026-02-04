@@ -7,22 +7,22 @@ public class Trampoline : InteractableBase
     [SerializeField] private float jumpForce = 20f;
 
     [Header("Visual Bounce")]
-    [SerializeField] private float squashAmount = 0.2f;
-    [SerializeField] private float squashDuration = 0.1f;
+    [SerializeField] private float downAmount = 0.3f;
+    [SerializeField] private float bounceDuration = 0.1f;
 
-    private Vector3 startScale;
-    private Tween squashTween;
+    private Vector3 startPos;
+    private Tween bounceTween;
 
     private void Start()
     {
-        startScale = transform.localScale;
+        startPos = transform.position;
     }
 
     public override void BeginInteraction()
     {
         if (_playerRB == null) return;
 
-        // Y ekseni hýzýný sýfýrla 
+        // Y hýzýný sýfýrla
         _playerRB.linearVelocity = new Vector2(_playerRB.linearVelocity.x, 0f);
 
         // Yukarý zýplat
@@ -38,16 +38,16 @@ public class Trampoline : InteractableBase
 
     private void PlayBounce()
     {
-        if (squashTween != null && squashTween.IsActive())
-            squashTween.Kill();
+        if (bounceTween != null && bounceTween.IsActive())
+            bounceTween.Kill();
 
-        squashTween = transform
-            .DOScaleY(startScale.y - squashAmount, squashDuration)
+        bounceTween = transform
+            .DOMoveY(startPos.y - downAmount, bounceDuration)
             .SetEase(Ease.OutQuad)
             .OnComplete(() =>
             {
                 transform
-                    .DOScaleY(startScale.y, squashDuration)
+                    .DOMoveY(startPos.y, bounceDuration)
                     .SetEase(Ease.OutBounce);
             });
     }
