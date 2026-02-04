@@ -661,8 +661,16 @@ PrefabInstance:
       value: Moving Platform
       objectReference: {fileID: 0}
     - target: {fileID: 7763592776150561349, guid: 87845bff82b753d409c1e5e6384d647d, type: 3}
+      propertyPath: loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763592776150561349, guid: 87845bff82b753d409c1e5e6384d647d, type: 3}
       propertyPath: direction
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763592776150561349, guid: 87845bff82b753d409c1e5e6384d647d, type: 3}
+      propertyPath: moveOnStart
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
