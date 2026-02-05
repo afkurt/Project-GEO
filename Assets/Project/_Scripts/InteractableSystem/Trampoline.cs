@@ -13,6 +13,9 @@ public class Trampoline : InteractableBase
     private Vector3 startPos;
     private Tween bounceTween;
 
+
+
+
     private void Start()
     {
         startPos = transform.position;
@@ -46,4 +49,6 @@ public class Trampoline : InteractableBase
             .SetEase(Ease.OutSine)
             .SetLoops(2, LoopType.Yoyo);
     }
+
+
 }
