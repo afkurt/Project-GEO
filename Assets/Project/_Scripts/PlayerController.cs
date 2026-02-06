@@ -74,6 +74,12 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene(currentScene.buildIndex);
         }
 
+
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            SceneManager.LoadScene("Main Menu Scene");
+        }
+
         if (jump.action.WasPressedThisFrame())
             jumpBufferCounter = jumpBufferTime;
         else
